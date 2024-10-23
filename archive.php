@@ -33,6 +33,7 @@
       <span class="eng">Works</span>
       <span class="ja">制作実績一覧</span>
     </h3>
+    <p style="text-align: center; margin-bottom: 60px;">※年間80件の案件を制作していましたが、公開サイトに制限があるため一部抜粋して参考サイトに掲載しております。</p>
     <div class="all-works-container flex flx-wrp">
       <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
           <article class="com-all-works">
