@@ -33,8 +33,8 @@
             <dd>Wordpress/EC-CUBE</dd>
           </div>
           <div class="in-dl flex flx-alitem-strt">
-            <dt>Position</dt>
-            <dd>PG/コーディングリーダー</dd>
+            <dt>Design</dt>
+            <dd>Photoshop/Illustrator/Figma/XD</dd>
           </div>
         </dl>
       </div>
@@ -91,6 +91,8 @@
         <div class="in-dl flex flx-alitem-strt flx-btw">
           <dt class="flex flx-alitem-c flx-center">2020</dt>
           <dd>
+            <p>フルリモート検証作業者として参加。</p>
+            <p>社内リモートを推奨し、フルリモート勤務を開始。</p>
             <p>通常案件に加え、社内案件、マニュアル作成や業務改善、<br class="sp-none">新人教育などの管理業務を兼任。</p>
           </dd>
         </div>
@@ -99,7 +101,7 @@
           <dd>
             <p>全国コーディングリーダーを退任</p>
             <p>社内コーディングの質をより向上させるべく「事業推進課」へと配属。</p>
-            <p>業務はそのままに、コーダー全体のスキルチェックや新商材の開発に努めています。</p>
+            <p>業務はそのままに、コーダー全体のスキルチェックや新商材の開発に努める。</p>
           </dd>
         </div>
         <div class="in-dl flex flx-alitem-strt flx-btw">
@@ -107,7 +109,6 @@
           <dd>
             <p>Web開発の会社に転職</p>
             <p>これまでのフロントエンドのWebサイト制作に加えて、Vue3やNuxtのフレームワークを実装</p>
-            <p></p>
           </dd>
         </div>
       </dl>
