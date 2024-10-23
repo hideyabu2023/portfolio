@@ -1,0 +1,179 @@
+@charset "UTF-8";
+/* ===================================================
+　共通コード
+====================================================*/
+html {
+  font-size: 62.5%;
+}
+
+body {
+  min-width: 1080px;
+  line-height: 1.75;
+  letter-spacing: 0.1rem;
+}
+
+.pc-none {
+  display: none !important;
+}
+
+.inbox {
+  width: 980px;
+  margin: 0 auto;
+}
+
+a[href^="tel:"] {
+  pointer-events: none;
+}
+
+/*共通パーツ
+----------------------------------------------------*/
+.com-dl .in-dl,
+.com-dl dd,
+.com-dl dt {
+  box-sizing: border-box;
+}
+.com-dl > .in-dl > dt,
+.com-dl > .in-dl > dd {
+  font-size: 15px;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 10px 20px;
+}
+.com-dl > .in-dl > dt {
+  width: 300px;
+}
+.com-dl > .in-dl > dd {
+  width: 780px;
+}
+
+.map-icon {
+  text-align: center;
+}
+.map-icon span:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f3c5";
+  font-weight: 900;
+}
+
+/*プライバシーポリシー
+----------------------------------------------------*/
+#contents-u.privacy .privacy-box {
+  margin-bottom: 50px;
+}
+#contents-u.privacy .privacy-box:last-child {
+  margin-bottom: 0;
+}
+
+/*サイトマップ
+----------------------------------------------------*/
+#site-map ul li a {
+  box-sizing: border-box;
+  display: block;
+  padding: 15px 0 15px 35px;
+  position: relative;
+  font-weight: bold;
+  transition: 0.3s;
+}
+#site-map ul li a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  margin-top: -8px;
+  border: solid 8px transparent;
+  transition: 0.3s;
+}
+#site-map ul li a:hover:before {
+  left: 10px;
+}
+
+/*お問い合わせ
+----------------------------------------------------*/
+.error-text {
+  color: #f44336;
+}
+
+.cont-dl {
+  margin-bottom: 40px;
+}
+.cont-dl .in-dl dt {
+  width: 320px;
+  position: relative;
+  vertical-align: top;
+}
+.cont-dl .in-dl dt .hissu {
+  line-height: 1;
+  padding: 2px 8px;
+  position: absolute;
+  right: 0;
+  font-size: 13px;
+}
+.cont-dl .in-dl dd {
+  width: 760px;
+}
+.cont-dl .in-dl dd input[type=text],
+.cont-dl .in-dl dd input[type=num],
+.cont-dl .in-dl dd input[type=email],
+.cont-dl .in-dl dd input[type=url],
+.cont-dl .in-dl dd input[type=tel] {
+  width: 100%;
+  padding: 10px;
+  border: solid #ccc 1px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.cont-dl .in-dl dd textarea {
+  padding: 5px;
+  border: solid #ccc 1px;
+  width: 100%;
+  height: 200px;
+  background: #fff;
+  box-sizing: border-box;
+  line-height: 1.8;
+}
+.cont-dl .in-dl dd #pc01,
+.cont-dl .in-dl dd #pc02 {
+  margin-bottom: 10px;
+}
+.cont-dl .in-dl dd #pc01 {
+  width: 60px !important;
+}
+.cont-dl .in-dl dd #pc02 {
+  width: 80px !important;
+}
+
+.contact-btn ul {
+  text-align: center;
+}
+.contact-btn ul li {
+  display: inline-block;
+  position: relative;
+  margin-right: 40px;
+}
+.contact-btn ul li #form-btn {
+  width: 340px;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  padding: 25px 0;
+  transition: 0.3s;
+  font-weight: bold;
+}
+.contact-btn ul li:last-child {
+  margin-right: 0;
+}
+
+/*ページが見つかりません。
+----------------------------------------------------*/
+.not-found-txt {
+  text-align: center;
+}
+.not-found-txt p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+.not-found-txt p a {
+  font-weight: bold;
+}/*# sourceMappingURL=common.css.map */

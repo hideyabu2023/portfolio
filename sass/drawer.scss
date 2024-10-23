@@ -1,0 +1,234 @@
+@import "_mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap');
+
+/*変数指定
+=======================================================*/
+/*メインカラー
+--------------------------------------------*/
+$mc01: #333;
+$mc02: #f2f2f2;
+
+$mf01: #222;
+$mf02: #38322d;
+
+
+/*フォント
+--------------------------------------------*/
+$zenk: 'Zen Kaku Gothic New', sans-serif;
+
+$notosans: "Noto Sans JP",
+  sans-serif;
+
+
+body {
+  font-size: 4vw;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/*flex
+------------------------------------ */
+.flex {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: -ms-flexbox;
+  -js-display: flex;
+  display: flex;
+  width: 100%;
+}
+
+.flx-center {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.flx-alitem-c {
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+
+/*---------------------------------------------
+ Drawer Default
+---------------------------------------------*/
+.drawer-logo {
+  width: 25%;
+  margin: 0 auto 10vw;
+}
+
+.drawer-nav {
+	padding: 15% 10% 10%!important;
+	background: #fff;
+  .drawer-menu {
+    >li {
+      border-bottom: 1px solid #ccc;
+      >.drawer-menu-item {
+        font-size: 4.5vw;
+        letter-spacing: .5rem;
+        padding: 5% 5% 5% 6vw;
+        font-weight: 500;
+        color: $mc01;
+      }
+    }
+    .current {
+      position: relative;
+      a {
+        font-size: 5vw;
+        font-weight: 700;
+        &:before {
+          transition: .1s all ease-in;
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          width: 0;
+          height: 0;
+          border: 2vw solid transparent ;
+          border-left: 2.5vw solid $mc01;
+          box-sizing: border-box;
+          margin-top: -2vw;
+        }
+      }
+    }
+  }
+}
+
+/*Drawer Btn Setting
+=======================================*/
+
+/*Right Position
+-----------------------------------*/
+/*close*/
+.drawer--right {
+  .drawer-toggle.drawer-hamburger {
+    background: #000!important;
+    right: 2.5%!important;
+    top: 1%;
+  }
+}
+
+/*open*/
+.drawer--right.drawer-open {
+  .drawer-hamburger {
+    top: 1%;
+    // bottom: 1%;
+    right: 2.5%!important;
+  }
+}
+
+
+/*Drawer Btn
+-----------------------------------*/
+.drawer-hamburger-icon,
+.drawer-hamburger-icon:after,
+.drawer-hamburger-icon:before  {
+	background-color: #fff!important;
+}
+
+/*drawer box*/
+.drawer-hamburger {
+  width: 55px;
+  height: 55px;
+}
+
+/*drawer line*/
+.drawer-hamburger-icon  {
+  &:before {
+    top: -8px;
+  }
+  &:after {
+    top: 8px;
+  }
+}
+
+/*drawer box txt*/
+.drawer-hamburger-txt {
+  color: #fff;
+  font-size: 9px;
+  bottom: -15px;
+}
+
+
+/*DropDown Menu
+---------------------------------------------*/
+.drawer-dropdown-menu {
+  >li,
+  .drawer-dropdown-menu-item {
+    line-height: 1.2;
+    border-bottom: 1px solid #fff;
+  }
+}
+
+.level1,
+.level2 {
+  position: relative;
+  a,p {
+    font-size: 4vw;
+  }
+}
+.level1 {
+  background: #fff;
+}
+.level2 {
+  background: #fff;
+}
+
+.drawer-current {
+  right: 5px!important;
+  top: 50%;
+  border-bottom: 1px solid #000!important;
+  border-right: 1px solid #000!important;
+}
+
+
+/*Original Custum Code
+=======================================*/
+/*SNS
+-----------------------------------*/
+.sns-list {
+  margin: 10% auto 5%;
+  li {
+    margin-right: 5%;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+/*Address
+-----------------------------------*/
+.drawer-address {
+  margin: 5% auto;
+  text-align: center;
+  font-size: 3.5vw;
+  li {
+    margin-bottom: 3%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*Contact btn
+-----------------------------------*/
+.drawer-mail-btn {
+  text-align: center;
+  width: 60%;
+  display: block;
+  background: #000;
+  margin: 10% auto;
+  padding: 4% 0;
+  font-weight: 700;
+  letter-spacing: .2rem;
+  span {
+    font-size: 4vw;
+    color: #fff;
+    position: relative;
+  }
+}

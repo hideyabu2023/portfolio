@@ -1,0 +1,164 @@
+@charset "UTF-8";
+/* ===================================================
+　共通コード
+====================================================*/
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.5rem;
+  line-height: 1.75;
+  letter-spacing: 0.1rem;
+}
+
+.sp-none {
+  display: none !important;
+}
+
+.inbox {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.map-icon {
+  text-align: center;
+}
+.map-icon span:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f3c5";
+  font-weight: 900;
+}
+
+/*共通パーツ
+----------------------------------------------------*/
+.com-dl .in-dl,
+.com-dl dd,
+.com-dl dt {
+  box-sizing: border-box;
+}
+.com-dl > .in-dl {
+  margin-bottom: 5%;
+}
+.com-dl > .in-dl:last-child {
+  margin-bottom: 0;
+}
+.com-dl > .in-dl > dt,
+.com-dl > .in-dl > dd {
+  padding: 3% 4%;
+}
+
+/*プライバシーポリシー
+----------------------------------------------------*/
+#contents-u.privacy .privacy-box {
+  margin-bottom: 10%;
+}
+#contents-u.privacy .privacy-box:last-child {
+  margin-bottom: 0;
+}
+
+/*サイトマップ
+----------------------------------------------------*/
+#site-map ul li a {
+  box-sizing: border-box;
+  display: block;
+  padding: 10px 0 10px 25px;
+  position: relative;
+  font-weight: bold;
+  transition: 0.3s;
+}
+#site-map ul li a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  margin-top: -6px;
+  border: solid 6px transparent;
+  transition: 0.3s;
+}
+
+/*お問い合わせ
+----------------------------------------------------*/
+.error-text {
+  color: #f44336;
+}
+
+.cont-dl {
+  margin-bottom: 10%;
+}
+.cont-dl .in-dl dt {
+  position: relative;
+  vertical-align: top;
+}
+.cont-dl .in-dl dt .hissu {
+  line-height: 1;
+  padding: 2px 8px;
+  position: absolute;
+  right: 0;
+  font-size: 3vw;
+}
+.cont-dl .in-dl dd input[type=text],
+.cont-dl .in-dl dd input[type=num],
+.cont-dl .in-dl dd input[type=email],
+.cont-dl .in-dl dd input[type=url],
+.cont-dl .in-dl dd input[type=tel] {
+  width: 100%;
+  padding: 4%;
+  border: solid #ccc 1px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.cont-dl .in-dl dd textarea {
+  border: solid #ccc 1px;
+  width: 100%;
+  height: 200px;
+  background: #fff;
+  box-sizing: border-box;
+  line-height: 1.8;
+}
+.cont-dl .in-dl dd #pc01,
+.cont-dl .in-dl dd #pc02 {
+  margin-bottom: 10px;
+}
+.cont-dl .in-dl dd #pc01 {
+  width: 60px !important;
+}
+.cont-dl .in-dl dd #pc02 {
+  width: 80px !important;
+}
+
+.contact-btn ul {
+  text-align: center;
+}
+.contact-btn ul li {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 5%;
+}
+.contact-btn ul li #form-btn {
+  width: 280px;
+  color: #fff;
+  font-size: 4vw;
+  letter-spacing: 3px;
+  cursor: pointer;
+  padding: 6% 0;
+  transition: 0.3s;
+  font-weight: bold;
+}
+.contact-btn ul li:last-child {
+  margin-bottom: 0;
+}
+
+/*ページが見つかりません。
+----------------------------------------------------*/
+.not-found-txt {
+  text-align: center;
+}
+.not-found-txt p {
+  font-size: 3.8vw;
+  line-height: 1.8;
+}
+.not-found-txt p a {
+  font-weight: bold;
+}/*# sourceMappingURL=common_sp.css.map */

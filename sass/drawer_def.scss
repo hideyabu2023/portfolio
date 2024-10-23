@@ -1,0 +1,265 @@
+/*---------------------------------------------
+ Drawer Default
+---------------------------------------------*/
+.drawer-logo {
+  width: 40%;
+  margin-bottom: 8%;
+}
+
+.drawer-nav {
+	text-align: left;
+	padding: 15% 10% 10%!important;
+	box-sizing: border-box;
+	background: #fff;
+  .drawer-menu {
+    >li {
+      border-bottom: 1px solid #c6beaf;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      >.drawer-menu-item {
+        font-size: 3.8vw;
+        display: block;
+        position: relative;
+        padding: 5%;
+        box-sizing: border-box;
+        font-weight: bold;
+        color: #000;
+      }
+    }
+  }
+}
+
+/*Drawer Btn Setting
+=======================================*/
+.drawer-hamburger,
+.drawer--right.drawer-open .drawer-nav,
+.drawer--right.drawer-open .drawer-navbar .drawer-hamburger,
+.drawer--left.drawer-open .drawer-nav,
+.drawer--left.drawer-open .drawer-navbar .drawer-hamburger  {
+	z-index: 100000!important;
+}
+
+/*Right Position
+-----------------------------------*/
+.drawer--right {
+  .drawer-toggle.drawer-hamburger {
+    background: #000!important;
+    right: 2.5%!important;
+    top: 1%;
+  }
+}
+
+
+.drawer--right.drawer-open {
+  .drawer-hamburger {
+    background: #000!important;
+    right: 2.5%!important;
+    top: 1%;
+    z-index: 1000000!important;
+  }
+}
+
+/*Left Position
+-----------------------------------*/
+.drawer--left {
+  .drawer-toggle.drawer-hamburger {
+    background: #000!important;
+    left: 2.5%!important;
+    top: 1%;
+  }
+}
+
+.drawer--left.drawer-open {
+  .drawer-hamburger {
+    top: 1%;
+    left: 2.5%!important;
+    z-index: 1000000!important;
+  }
+}
+
+
+/*Drawer Btn
+-----------------------------------*/
+.drawer-hamburger-icon,
+.drawer-hamburger-icon:after,
+.drawer-hamburger-icon:before  {
+	background-color: #fff!important;
+}
+.drawer-open .drawer-hamburger-icon {
+	background-color: transparent!important;
+}
+
+.drawer-toggle.drawer-hamburger {
+	background: #000!important;
+  right: 2.5%!important;
+  top: 1%;
+  overflow: visible!important;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.drawer-hamburger {
+  width: 48px;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.drawer-hamburger-icon  {
+  margin-top: 0;
+  &:before {
+    width: 100%;
+    top: -8px;
+  }
+  &:after {
+    width: 100%;
+    top: 8px;
+  }
+}
+
+.drawer-hamburger-txt {
+  text-align: center;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-size: 9px;
+  bottom: -15px;
+}
+
+
+/*DropDown Menu
+---------------------------------------------*/
+.drawer-dropdown-menu {
+  >li,
+  .drawer-dropdown-menu-item {
+    line-height: 1.2;
+    padding: 2%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #fff;
+    &:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+}
+.drawer-menu-item {
+  position: relative;
+}
+
+.level1,
+.level2 {
+  font-size: 4vw;
+  position: relative;
+  li,p {
+    padding: 2% 0 2% 2%!important;
+  }
+  a,p {
+    font-size: 4vw;
+  }
+}
+.level1 {
+  background: #f2f2f2;
+}
+.level2 {
+  background: #ccc;
+  li {
+    a {
+      padding-left: 5%!important;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.drawer-current {
+  position: absolute;
+  right: 5px!important;
+  top: 50%;
+  width: 10px!important;
+  height: 10px!important;
+  border: solid transparent 1px!important;
+  box-sizing: border-box;
+  border-bottom: 1px solid #000!important;
+  border-right: 1px solid #000!important;
+  transform: rotate(-45deg);
+  margin-top: -5px!important;
+  transition: .1s all ease-in;
+}
+
+/*current　矢印設定
+----------------------------------*/
+.drawer-dropdown {
+  .drawer-menu-item.current {
+    .drawer-current {
+      transform: rotate(45deg)!important;
+    }
+  }
+}
+
+
+/*Original Custum Code
+=======================================*/
+/*SNS
+-----------------------------------*/
+.sns-list {
+  margin: 10% auto 5%;
+  li {
+    margin-right: 5%;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+/*Address
+-----------------------------------*/
+.drawer-address {
+  margin: 5% auto;
+  text-align: center;
+  font-size: 3vw;
+  li {
+    margin-bottom: 3%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*Contact btn
+-----------------------------------*/
+.drawer-mail-btn {
+  text-align: center;
+  width: 60%;
+  display: block;
+  background: #000;
+  margin: 10% auto;
+  padding: 4% 0;
+  span {
+    font-size: 3.5vw;
+    color: #fff;
+    position: relative;
+  }
+}
+
+
+/*縦スクロール設定
+---------------------------------------------*/
+.drawer--top.drawer-open .drawer-nav {
+  top: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drawer--left.drawer-open .drawer-nav,
+.drawer--left .drawer-hamburger,
+.drawer--left.drawer-open .drawer-navbar .drawer-hamburger, {
+  left: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drawer--right.drawer-open .drawer-nav,
+.drawer--right .drawer-hamburger,
+.drawer--right.drawer-open .drawer-navbar .drawer-hamburger {
+  right: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,626 @@
+// ==============================================
+// メインビジュアル・サブビジュアルテンプレート
+// ==============================================
+@mixin mv($height, $num: 3) {
+  #mv {
+    z-index: 0;
+    height: $height;
+    position: relative;
+
+    .bx-wrapper,
+    ul {
+      height: 100%;
+    }
+
+    .catch {
+      text-align: center;
+
+      img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 999;
+        margin: auto;
+      }
+    }
+
+    li {
+      height: $height;
+
+      @for $i from 1 through $num {
+        &:nth-child(#{$i}) {
+          background: url(../img/mv/slider0#{$i}-bg.jpg) no-repeat center/cover;
+        }
+      }
+    }
+  }
+}
+
+@mixin cacth-shadow($fcolor: #fff, $fsize: 40px, $color: #000, $opacity: 0.8) {
+  color: $fcolor;
+  font-size: $fsize;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  text-shadow: rgba($color, $opacity) 1px 1px 5px,
+    rgba($color, $opacity) -1px 1px 5px, rgba($color, $opacity) 1px -1px 5px,
+    rgba($color, $opacity) -1px -1px 5px, rgba($color, $opacity) 1px 1px 8px,
+    rgba($color, $opacity) -1px 1px 8px, rgba($color, $opacity) 1px -1px 8px,
+    rgba($color, $opacity) -1px -1px 8px;
+}
+
+@mixin ma($height) {
+  #sv {
+    height: $height;
+    background: url(../img/common/ma-bg.jpg) no-repeat center/cover;
+  }
+}
+
+// ==============================================
+// 画像テンプレート
+// ==============================================
+@mixin bf-block {
+  content: "";
+  position: absolute;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin abs-ptsn-img($top: auto,
+  $right: auto,
+  $bottom: auto,
+  $left: auto,
+  $width: auto,
+  $height: auto) {
+  content: "";
+  position: absolute;
+  display: block;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  width: $width;
+  height: $height;
+}
+
+@mixin before($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+  }
+}
+
+@mixin after($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+  }
+}
+
+@mixin before-after($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  content: "";
+  display: block;
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin bg-img-cover($path01, $file-name, $extension) {
+  background: url("../img/#{$path01}/#{$file-name}.#{$extension}") no-repeat center/cover;
+}
+
+@mixin bg-img-contain($path01, $file-name, $extension) {
+  background: url("../img/#{$path01}/#{$file-name}.#{$extension}") no-repeat center/contain;
+}
+
+// ==============================================
+// リストクリア・テンプレート
+// ==============================================
+@mixin mg-clear($list) {
+  &:nth-child(#{$list}n) {
+    margin-right: 0;
+  }
+
+  &:nth-child(-n + #{$list}) {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// ==============================================
+// テキスト・テンプレート
+// ==============================================
+@mixin text-bd($color: #000) {
+  background: -webkit-linear-gradient(transparent 50%, #{$color} 50%);
+}
+
+// ==============================================
+// グラデーション・テンプレート
+// ==============================================
+@mixin grd-linear($position, $color01: #fff, $color02: #000) {
+  background: linear-gradient($position, $color01, $color02);
+}
+
+// ==============================================
+// ボタン・テンプレート
+// ==============================================
+@mixin btn01($width, $bg, $fcolor) {
+  width: $width;
+  background: $bg;
+  border: $bg 1px solid;
+  color: $fcolor;
+  font-weight: bold;
+  position: relative;
+  transition: 0.3s all;
+  display: block;
+  text-align: center;
+
+  span {
+    transition: 0.3s all;
+    position: relative;
+    font-weight: bold;
+    color: $fcolor;
+  }
+}
+
+@mixin hover-btn($fcolor, $bg, $border, $opa) {
+  &:hover {
+    border: $border solid 1px;
+    background: rgba($bg, $opa);
+
+    span {
+      color: $fcolor;
+    }
+  }
+}
+
+@mixin btn-def {
+  position: relative;
+  text-align: center;
+  display: block;
+  letter-spacing: 1.2px;
+  transition: all 0.3s;
+  margin: 0 auto;
+  font-size: 14px;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    transition: all 0.3s;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  span {
+    position: relative;
+    transition: all 0.3s;
+    transform: scale(1, 1);
+    z-index: 10;
+  }
+}
+
+/*標準ボタン
+---------------------------------------------------------------*/
+@mixin more-btn($bg: #000, $fcolor: #fff) {
+  @for $i from 1 through 5 {
+    .more-btn0#{$i} {
+      @include btn-def;
+      border: solid $bg 1px;
+      background: $bg;
+      color: $fcolor;
+      font-weight: bold;
+      padding: 10px 0;
+      overflow: hidden;
+
+      span {
+        color: $fcolor;
+      }
+
+      @media screen and (max-width: 768px) {
+        font-size: 3.5vw;
+      }
+
+      @if $i==1 {
+        &:hover {
+          background: $fcolor;
+          border: solid $bg 1px;
+
+          span {
+            color: $bg;
+          }
+        }
+      }
+
+      @else if $i==2 {
+        &:before {
+          opacity: 0;
+          background: rgba($fcolor, 0.4);
+          transform: scale(1, 0.1);
+        }
+
+        &:after {
+          transition: all 0.3s;
+          border: 1px solid rgba($fcolor, 0.1);
+        }
+
+        &:hover {
+          &:before {
+            opacity: 1;
+            transform: scale(1, 1);
+          }
+
+          &:after {
+            opacity: 0;
+            transform: scale(1, 0.1);
+          }
+        }
+      }
+
+      @else if $i==3 {
+        &:before {
+          opacity: 0;
+          background: rgba($fcolor, 0.5);
+          transform: scale(0.1, 0.1);
+        }
+
+        &:hover {
+          &:before {
+            opacity: 1;
+            transform: scale(1, 1);
+          }
+
+          &:after {
+            transform: scale(0, 0);
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*鍵フックボタン
+---------------------------------------------------------------*/
+@mixin more-btn-line($type: start, $width: 100%, $fcolor: #fff, $color: #ccc) {
+  .more-btn-line-#{$type} {
+    width: $width;
+    color: $color;
+    background: transparent;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $color;
+    position: relative;
+    display: inline-block;
+    padding: 0.5em 1em;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    font-family: comfortaa;
+    font-weight: bold;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    &:before,
+    &:after {
+      @include bf-block;
+      border-color: $color;
+      border-style: solid;
+      width: 1em;
+      height: 1em;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:before {
+      top: -6px;
+      left: -6px;
+      border-width: 2px 0 0 2px;
+      z-index: 5;
+    }
+
+    &:after {
+      bottom: -6px;
+      right: -6px;
+      border-width: 0 2px 2px 0;
+    }
+
+    @if $type=="start" {
+      &:hover {
+        color: $fcolor;
+        background-color: $color;
+        border-color: $color;
+
+        &:before,
+        &:after {
+          width: calc(100% + 12px);
+          height: calc(100% + 12px);
+          border-color: $color;
+        }
+      }
+    }
+
+    @else if $type=="turn" {
+      &:hover {
+        color: $fcolor;
+        background-color: $color;
+        border-color: $color;
+
+        &:before,
+        &:after {
+          width: calc(100% + 12px);
+          height: calc(100% + 12px);
+          border-color: $color;
+          transform: rotateY(180deg);
+        }
+      }
+    }
+  }
+}
+
+/*カーテンボタン
+---------------------------------------------------------------*/
+@mixin curtn-btn($type, $mbcolor, $curtainbg) {
+  .curtn-btn-#{$type} {
+    padding: 15px 0;
+    font-weight: bold;
+    display: block;
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    background: $mbcolor;
+    overflow: hidden;
+
+    &:before {
+      @include bf-block;
+      width: 100%;
+      height: 100%;
+      background: $curtainbg;
+      transition: all 0.3s ease-in-out;
+    }
+
+    span {
+      position: relative;
+      z-index: 100;
+    }
+
+    @if $type==top {
+      &:before {
+        left: 0;
+        top: -100%;
+      }
+
+      &:hover {
+        &:before {
+          top: 0;
+        }
+      }
+    }
+
+    @else if $type==right {
+      &:before {
+        right: -100%;
+        top: 0;
+      }
+
+      &:hover {
+        &:before {
+          right: 0;
+        }
+      }
+    }
+
+    @else if $type==bottom {
+      &:before {
+        left: 0;
+        bottom: -100%;
+      }
+
+      &:hover {
+        &:before {
+          bottom: 0;
+        }
+      }
+    }
+
+    @else if $type==left {
+      &:before {
+        left: -100%;
+        top: 0;
+      }
+
+      &:hover {
+        &:before {
+          left: 0;
+        }
+      }
+    }
+  }
+}
+
+/*ラインダッシュボタン
+---------------------------------------------------------------*/
+@mixin line-dash-btn($def-bg: #000,
+  $fcolor: #fff,
+  $fsize: 15px,
+  $hover-color: $mc01) {
+  @for $i from 1 through 3 {
+    .line-dash-btn-0#{$i} {
+      text-align: center;
+      display: block;
+      position: relative;
+      background: none;
+      border: none;
+      color: $fcolor;
+      font-weight: bold;
+      font-size: $fsize;
+      cursor: pointer;
+      background: rgba($def-bg, 0.9);
+
+      &:before,
+      &:after {
+        content: "";
+        width: 0;
+        height: 2px;
+        position: absolute;
+        transition: all 0.2s linear;
+        background: $hover-color;
+      }
+
+      &:before {
+        right: 0;
+        top: 0;
+      }
+
+      &:after {
+        left: 0;
+        bottom: 0;
+      }
+
+      span {
+        color: $fcolor;
+        display: block;
+        padding: 15px 0;
+
+        &:before,
+        &:after {
+          content: "";
+          width: 2px;
+          height: 0;
+          position: absolute;
+          transition: all 0.2s linear;
+          background: $hover-color;
+        }
+      }
+
+      @if $i==1 {
+        span {
+          &:before {
+            right: 0;
+            bottom: 0;
+          }
+
+          &:after {
+            left: 0;
+            top: 0;
+          }
+        }
+
+        &:hover {
+
+          &:before,
+          &:after {
+            transition-delay: 0s;
+            width: 100%;
+          }
+
+          span {
+
+            &:before,
+            &:after {
+              transition-delay: 0.2s;
+              height: 100%;
+            }
+          }
+        }
+      }
+
+      @else if $i==2 {
+        span {
+          &:before {
+            right: 0;
+            bottom: 0;
+          }
+
+          &:after {
+            left: 0;
+            top: 0;
+          }
+        }
+
+        &:hover {
+
+          &:before,
+          &:after {
+            transition-delay: 0s;
+            width: 100%;
+          }
+
+          span {
+
+            &:before,
+            &:after {
+              transition-delay: 0s;
+              height: 100%;
+            }
+          }
+        }
+      }
+
+      @else if $i==3 {
+        span {
+          &:before {
+            right: 0;
+            top: 0;
+          }
+
+          &:after {
+            left: 0;
+            bottom: 0;
+          }
+        }
+
+        &:hover {
+
+          &:before,
+          &:after {
+            transition-delay: 0s;
+            width: 100%;
+          }
+
+          span {
+
+            &:before,
+            &:after {
+              transition-delay: 0s;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*IE対応のグラデーション
+========================================================================*/
+@mixin bgGrad($gradColStr, $gradColEnd) {
+  background: $gradColStr;
+  background: -moz-linear-gradient(right, $gradColStr 0%, $gradColEnd 100%);
+  background: -webkit-linear-gradient(right, $gradColStr 0%, $gradColEnd 100%);
+  background: linear-gradient(to left, $gradColStr 0%, $gradColEnd 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$gradColStr', endColorstr='$gradColEnd', GradientType=0);
+}

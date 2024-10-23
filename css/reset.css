@@ -1,0 +1,424 @@
+@charset "utf-8";
+
+/* =======================================
+
+     CSS BrowserReset BaseElements
+
+     (C)BLACKFLAG.NET ALL RIGHTS RESERVED.
+     http://black-flag.net/
+
+ ======================================= */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+figcaption,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  /*	outline: 0;*/
+}
+
+html {
+  font-size: 75%;
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  word-wrap: break-word;
+}
+
+img {
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+strong {
+  font-weight: bold;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  /*	border-collapse: separate;*/
+  border-spacing: 0;
+}
+
+caption,
+th,
+td {
+  font-weight: normal;
+  text-align: left;
+  vertical-align: top;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+}
+
+blockquote,
+q {
+  quotes: "" "";
+}
+
+a:focus {
+
+  /*\*/
+  overflow: hidden;
+  /**/
+}
+
+option {
+  padding-right: 10px;
+}
+
+
+main {
+  display: block;
+}
+
+/* ------------------------------
+HTML5 ELEMENTS
+------------------------------ */
+header,
+article,
+aside,
+section,
+footer,
+nav,
+menu,
+details,
+hgroup,
+summary {
+  display: block;
+}
+
+a:link {
+  text-decoration: none;
+  color: #000;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #000;
+}
+
+a:active {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+/*---------------------------------------
+    スマホ・ボタンCSSのリセット
+---------------------------------------*/
+input[type="submit"],
+input[type="button"] {
+  border-radius: 0;
+  -webkit-box-sizing: content-box;
+  -webkit-appearance: button;
+  appearance: button;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+input[type="submit"]::-webkit-search-decoration,
+input[type="button"]::-webkit-search-decoration {
+  display: none;
+}
+
+input[type="submit"]::focus,
+input[type="button"]::focus {
+  outline-offset: -2px;
+}
+
+
+
+
+
+/*---------------------------------------
+    シンプルブック用css
+
+    リッチテキストエディター外枠に
+    「sb_style」のクラス名を付与　←ダサければ変えてもらっても良いです
+    importantはコーダーのほうで必要と感じれば入れてください。
+    （直接スタイリング禁止であれば不要だと思ったので・・・）
+---------------------------------------*/
+
+.sb_style a {
+  text-decoration: underline;
+}
+
+.sb_style em {
+  font-style: italic;
+}
+
+.sb_style ol,
+.sb_style ul {
+  list-style: decimal;
+}
+
+.sb_style table {
+  border: 1px #666666 solid;
+}
+
+.sb_style th,
+.sb_style td {
+  vertical-align: middle;
+  border: 1px #666666 solid;
+}
+
+.sb_style a {
+  color: #008bf7;
+}
+
+/*---------------------------------------
+   リッチエディタ内のベーススタイリング
+---------------------------------------*/
+@media screen and (min-width: 767px) {
+
+  .sb_style h1,
+  .sb_style h2,
+  .sb_style h3,
+  .sb_style h4,
+  .sb_style h5,
+  .sb_style h6 {
+    box-sizing: border-box;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .sb_style h1 {
+    padding: 0 5px;
+    font-size: 28px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #000;
+  }
+
+  .sb_style h2 {
+    padding-left: 10px;
+    font-size: 26px;
+    border-left: 3px solid #000;
+  }
+
+  .sb_style h3 {
+    font-size: 24px;
+    padding: 5px 10px;
+    background: #000;
+  }
+
+  .sb_style h4 {
+    padding-bottom: 8px;
+    font-size: 20px;
+    position: relative;
+  }
+
+  .sb_style h4:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 2px;
+    background: #000;
+  }
+
+  .sb_style h5 {
+    font-size: 18px;
+    padding: 5px 10px;
+    background: #f2f2f2;
+  }
+
+  .sb_style h6 {
+    font-size: 16px;
+    color: #000;
+  }
+
+  .sb_style ul {
+    padding-left: 30px;
+  }
+
+  .sb_style ul li {
+    margin-bottom: 5px;
+  }
+
+  .sb_style ol {
+    padding-left: 30px;
+  }
+
+  .sb_style ol li {
+    margin-bottom: 5px;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .sb_style table {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    border: none;
+  }
+
+  .sb_style tbody {
+    width: 100%;
+    display: table;
+  }
+
+  .sb_style h1,
+  .sb_style h2,
+  .sb_style h3,
+  .sb_style h4,
+  .sb_style h5,
+  .sb_style h6 {
+    box-sizing: border-box;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+
+  .sb_style h1 {
+    padding: 0 5px;
+    font-size: 6vw;
+    padding-bottom: 3%;
+    border-bottom: 1px solid #000;
+  }
+
+  .sb_style h2 {
+    padding-left: 5%;
+    font-size: 5.5vw;
+    border-left: 2px solid #000;
+  }
+
+  .sb_style h3 {
+    font-size: 5vw;
+    padding: 3% 4%;
+    background: #000;
+    color: #fff;
+  }
+
+  .sb_style h4 {
+    padding-bottom: 3%;
+    font-size: 4.8vw;
+    position: relative;
+  }
+
+  .sb_style h4:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 15%;
+    height: 2px;
+    background: #000;
+  }
+
+  .sb_style h5 {
+    font-size: 4.5vw;
+    padding: 3% 5%;
+    background: #f2f2f2;
+  }
+
+  .sb_style h6 {
+    font-size: 4.2vw;
+    color: #000;
+  }
+
+  .sb_style ul {
+    padding-left: 30px;
+  }
+
+  .sb_style ul li {
+    margin-bottom: 5px;
+  }
+
+  .sb_style ol {
+    padding-left: 30px;
+  }
+
+  .sb_style ol li {
+    margin-bottom: 5px;
+  }
+
+  .sb_style img {
+    width: auto;
+    height: auto;
+  }
+}
