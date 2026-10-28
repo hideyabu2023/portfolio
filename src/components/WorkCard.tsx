@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Work } from "@/lib/microcms";
 import SkillList from "./SkillList";
+import WorkThumbnail from "./WorkThumbnail";
 
 type Props = {
   work: Work;
@@ -13,23 +13,11 @@ export default function WorkCard({ work, variant }: Props) {
   return (
     <article className={`com-${variant}-works`}>
       <Link href={`/works/${work.id}`}>
-        <div className="com-img">
-          <Image
-            src={work.thumbnail.url}
-            alt={work.title}
-            width={work.thumbnail.width ?? 1880}
-            height={work.thumbnail.height ?? 900}
-            sizes="(max-width: 767px) 100vw, 50vw"
-          />
-        </div>
+        <WorkThumbnail work={work} />
         <h4 className="site-name">{work.title}</h4>
-        <dl className={`${variant}-works-skill${variant === "all" ? " eng" : ""}`}>
-          {work.role && (
-            <div className="in-dl flex">
-              <dt>担当</dt>
-              <dd>{work.role}</dd>
-            </div>
-          )}
+        <dl
+          className={`${variant}-works-skill${variant === "all" ? " eng" : ""}`}
+        >
           {!!work.skills?.length && (
             <div className="in-dl flex">
               <dt>言語</dt>

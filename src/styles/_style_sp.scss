@@ -356,8 +356,7 @@ h1,h2,h3,h4,h5,h6 {
     &:last-child {
       margin-right: 0;
     }
-    a,
-    button {
+    a {
       width: 100%;
       padding: 2vw 0;
       span {
@@ -894,6 +893,11 @@ h1,h2,h3,h4,h5,h6 {
     }
     dd {
       width: 65%;
+    }
+    .s-works-txt {
+      margin-top: 8vw;
+      font-size: 3.8vw;
+      white-space: pre-wrap;
     }
   }
 }

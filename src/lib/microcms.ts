@@ -10,20 +10,14 @@ import { sampleWorks } from "./sample-works";
 export type Work = MicroCMSListContent & {
   /** サイト名 */
   title: string;
-  /** サムネイル */
-  thumbnail: MicroCMSImage;
-  /** カテゴリー（セレクト・単一選択でも配列で返る） */
-  category?: string[];
-  /** 会社名 */
-  company?: string;
+  /** サムネイル（未登録だとグレーの枠になる） */
+  thumbnail?: MicroCMSImage;
+  /** 説明文（テキストエリア。改行はそのまま表示） */
+  description?: string;
   /** 契約 */
   contract?: string;
-  /** 担当 */
-  role?: string;
   /** 言語（セレクト・複数選択） */
   skills?: string[];
-  /** 工数 */
-  workload?: string;
   /** 制作サイトURL */
   url?: string;
 };

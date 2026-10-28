@@ -13,5 +13,3 @@ export const NAV_ITEMS = [
   ...(CONTACT_URL ? [{ href: CONTACT_URL, label: "Contact" }] : []),
 ];
 
-/** 作品一覧の絞り込みボタン。microCMS のセレクトフィールドの選択肢と揃える */
-export const WORK_CATEGORIES = ["コーポレート", "LP", "EC", "challenge"];

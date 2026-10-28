@@ -369,8 +369,7 @@ h1,h2,h3,h4,h5,h6 {
     &:last-child {
       margin-right: 0;
     }
-    a,
-    button {
+    a {
       width: 100%;
       padding: 15px 0;
       min-width: 160px;
@@ -966,6 +965,10 @@ h1,h2,h3,h4,h5,h6 {
     }
     dd {
       width: 75%;
+    }
+    .s-works-txt {
+      margin-top: 8%;
+      white-space: pre-wrap;
     }
   }
 }

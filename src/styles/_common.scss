@@ -219,23 +219,9 @@ a[href^="tel:"] {
     }
   }
 }
-/* 作品一覧の絞り込みボタン（<button class="more-btn">）
-----------------------------------------------------*/
-button.more-btn {
-  cursor: pointer;
-  font: inherit;
-}
 
-.more-btn.is-active {
-  left: 0;
-  top: 0;
-  background-color: #fff;
-  &:before {
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-  }
-  span {
-    color: #333;
-  }
+/* サムネイル未登録の作品
+----------------------------------------------------*/
+.com-img.is-empty {
+  background: #ccc;
 }

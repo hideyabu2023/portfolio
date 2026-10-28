@@ -26,7 +26,9 @@ const FOCUSABLE =
 
 // CSS 変数から transition の時間(ms)を読む。CSS 側を直せば JS も追従する
 function durationMs(name: string, fallback: number) {
-  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
   const value = parseFloat(raw);
   if (!raw || Number.isNaN(value)) return fallback;
   return raw.endsWith("ms") ? value : value * 1000;
@@ -122,8 +124,10 @@ export default function Drawer() {
       }
       if (event.key !== "Tab" || !navRef.current) return;
 
-      const items = [toggleRef.current, ...navRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)]
-        .filter((el): el is HTMLElement => !!el && isVisible(el));
+      const items = [
+        toggleRef.current,
+        ...navRef.current.querySelectorAll<HTMLElement>(FOCUSABLE),
+      ].filter((el): el is HTMLElement => !!el && isVisible(el));
       if (!items.length) return;
       const first = items[0];
       const last = items[items.length - 1];
@@ -197,20 +201,32 @@ export default function Drawer() {
         tabIndex={-1}
         inert={!open}
         onTransitionEnd={(e) => {
-          if (e.target === navRef.current && e.propertyName === "transform") finishAnimation();
+          if (e.target === navRef.current && e.propertyName === "transform")
+            finishAnimation();
         }}
       >
         <p className="drawer-logo">
           <Link href="/">
-            <Image src="/img/common/hd-logo.png" alt={SITE_NAME} width={84} height={51} />
+            <Image
+              src="/img/common/hd-logo.png"
+              alt={SITE_NAME}
+              width={84}
+              height={51}
+            />
           </Link>
         </p>
         {/* capture で拾い、ページ遷移のスクロールより先に背面のロックを解除する */}
-        <ul className="drawer-menu" onClickCapture={(e) => {
-          if ((e.target as HTMLElement).closest("a[href]")) closeDrawer();
-        }}>
+        <ul
+          className="drawer-menu"
+          onClickCapture={(e) => {
+            if ((e.target as HTMLElement).closest("a[href]")) closeDrawer();
+          }}
+        >
           {NAV_ITEMS.filter((item) => item.href !== CONTACT_URL).map((item) => (
-            <li key={item.href} className={isCurrent(pathname, item.href) ? "current" : undefined}>
+            <li
+              key={item.href}
+              className={isCurrent(pathname, item.href) ? "current" : undefined}
+            >
               <Link href={item.href} className="drawer-menu-item">
                 <span>{item.label}</span>
               </Link>
@@ -221,14 +237,27 @@ export default function Drawer() {
           {INSTAGRAM_URL && (
             <ul className="sns-list flex flx-alitem-c flx-center">
               <li>
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-                  <Image src="/img/common/instagram-logo.png" alt="instagram" width={30} height={30} />
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/img/common/instagram-logo.png"
+                    alt="instagram"
+                    width={30}
+                    height={30}
+                  />
                 </a>
               </li>
             </ul>
           )}
           {CONTACT_URL && (
-            <Link href={CONTACT_URL} className="drawer-mail-btn" onClick={closeDrawer}>
+            <Link
+              href={CONTACT_URL}
+              className="drawer-mail-btn"
+              onClick={closeDrawer}
+            >
               <span>CONTACT</span>
             </Link>
           )}

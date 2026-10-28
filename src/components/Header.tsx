@@ -17,14 +17,25 @@ export default function Header() {
     <header id="header" className="hd-wrp flex flx-btw flx-alitem-c">
       <h1 className="hd-l">
         <Link href="/">
-          <Image src="/img/common/hd-logo.png" alt={SITE_NAME} width={84} height={51} priority />
+          <Image
+            src="/img/common/hd-logo.png"
+            alt={SITE_NAME}
+            width={84}
+            height={51}
+            priority
+          />
         </Link>
       </h1>
       <div className="hd-r">
         <nav id="nav" className="sp-none">
           <ul className="nav-list">
             {NAV_ITEMS.map((item) => (
-              <li key={item.href} className={isCurrent(pathname, item.href) ? "current" : undefined}>
+              <li
+                key={item.href}
+                className={
+                  isCurrent(pathname, item.href) ? "current" : undefined
+                }
+              >
                 <Link href={item.href} className="eng">
                   <span>{item.label}</span>
                 </Link>

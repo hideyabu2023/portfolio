@@ -18,7 +18,12 @@ export default function Footer() {
       <div className="ft-wrp">
         <p className="ft-logo">
           <Link href="/">
-            <Image src="/img/common/ft-logo.png" alt={SITE_NAME} width={82} height={50} />
+            <Image
+              src="/img/common/ft-logo.png"
+              alt={SITE_NAME}
+              width={82}
+              height={50}
+            />
           </Link>
         </p>
         <ul className="ft-sitemap flex flx-center flx-alitem-c">
@@ -33,7 +38,8 @@ export default function Footer() {
       </div>
       <div id="copyright" className="eng">
         <small>
-          Copyright &copy; <CurrentYear /> <Link href="/">portfolio</Link> All Rights Reserved.
+          Copyright &copy; <CurrentYear /> <Link href="/">portfolio</Link> All
+          Rights Reserved.
         </small>
       </div>
     </footer>

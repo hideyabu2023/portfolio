@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import SkillList from "@/components/SkillList";
 import SubVisual from "@/components/SubVisual";
+import WorkThumbnail from "@/components/WorkThumbnail";
 import { getWork, getWorks } from "@/lib/microcms";
 
 export async function generateStaticParams() {
@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/works/[id]">): Promise<Metadata> {
   const { id } = await params;
   const work = await getWork(id);
-  return { title: work ? `${work.title}｜制作実績` : "制作実績" };
+  return { title: work?.title ?? "制作実績" };
 }
 
 async function WorkDetail({ params }: Pick<PageProps<"/works/[id]">, "params">) {
@@ -24,11 +24,8 @@ async function WorkDetail({ params }: Pick<PageProps<"/works/[id]">, "params">) 
   if (!work) notFound();
 
   const rows: [string, React.ReactNode][] = [
-    ["会社名", work.company],
     ["契約", work.contract],
-    ["担当", work.role],
     ["言語", work.skills?.length ? <SkillList skills={work.skills} /> : null],
-    ["工数", work.workload],
   ];
 
   return (
@@ -37,16 +34,7 @@ async function WorkDetail({ params }: Pick<PageProps<"/works/[id]">, "params">) 
         <span className="ja">{work.title}</span>
       </h3>
       <div className="s-works-container flex flx-btw flx-alitem-strt">
-        <div className="com-img">
-          <Image
-            src={work.thumbnail.url}
-            alt={work.title}
-            width={work.thumbnail.width ?? 1880}
-            height={work.thumbnail.height ?? 900}
-            sizes="(max-width: 767px) 100vw, 50vw"
-            priority
-          />
-        </div>
+        <WorkThumbnail work={work} priority />
         <div className="s-works-bx">
           <dl className="s-works-dl eng">
             {rows
@@ -58,6 +46,7 @@ async function WorkDetail({ params }: Pick<PageProps<"/works/[id]">, "params">) 
                 </div>
               ))}
           </dl>
+          {work.description && <p className="s-works-txt">{work.description.trim()}</p>}
         </div>
       </div>
       {work.url && (
