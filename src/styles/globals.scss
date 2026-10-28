@@ -1,0 +1,33 @@
+/* ===================================================
+  エントリー
+  旧サイトの <link media="..."> による読み分けを、
+  meta.load-css を @media で包む形で再現している。
+  読み込み順も旧サイトと同じ（common → drawer → style）。
+====================================================*/
+@use "sass:meta";
+
+$sp: "screen and (max-width: 767px)";
+$pc: "screen and (min-width: 768px)";
+
+/* 共通 */
+@media #{$sp} {
+  @include meta.load-css("common_sp");
+}
+@media #{$pc} {
+  @include meta.load-css("common");
+}
+
+/* ドロワー（土台 → 既定値 → サイト別の上書き） */
+@include meta.load-css("drawer_base");
+@media #{$sp} {
+  @include meta.load-css("drawer_def");
+  @include meta.load-css("drawer");
+}
+
+/* ページ */
+@media #{$sp} {
+  @include meta.load-css("style_sp");
+}
+@media #{$pc} {
+  @include meta.load-css("style");
+}

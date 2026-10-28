@@ -1,0 +1,378 @@
+/*!
+ * drawer.css
+ * jquery-drawer v3.2.2 のクラス設計をそのまま引き継いだ置き換え版。
+ *
+ * 旧版との違い（カクつき対策）
+ *  - スライドを right / left のアニメーションから transform に変更
+ *    → 毎フレームのレイアウト計算が無くなり GPU 合成だけで動く
+ *  - オーバーレイを display:none/block から opacity に変更 → フェードが効く
+ *  - .drawer-hamburger の transition all を廃止（必要な色だけに限定）
+ *  - 3本線→×の変形も top ではなく translateY + rotate に変更
+ *    → スライド 0.6s の間のレイアウト回数が 50回前後から 1回になった
+ *  - パネル内スクロールはブラウザのネイティブ実装（iScroll 廃止）
+ *  - サブメニューは height + transition（jQuery slideToggle 廃止）
+ *
+ * 使う値は CSS 変数で上書きできます。
+ */
+
+/* ---------------------------------------------------------------
+ 変数
+--------------------------------------------------------------- */
+:root {
+  /* パネル幅。100% = 画面いっぱい（100vw だとスクロールバー分はみ出すため 100% を使う） */
+  --drawer-width: 100%;
+  /* スライドの速さ・イージング（旧版と同じ easeOutExpo 0.6s） */
+  --drawer-duration: 0.6s;
+  --drawer-easing: cubic-bezier(0.19, 1, 0.22, 1);
+  /* サブメニュー開閉の速さ */
+  --drawer-accordion-duration: 0.3s;
+  --drawer-overlay-color: rgba(0, 0, 0, 0.2);
+  /* ハンバーガー3本線の間隔。上下の線の位置と、×印にするときの
+     移動量の両方がこの値から計算されるので、間隔を変えるときはここだけ直す */
+  --drawer-bar-gap: 10px;
+  /* 重なり順（サイト側の最大が 999 なので十分上に置く） */
+  --drawer-z-overlay: 99998;
+  --drawer-z-nav: 99999;
+  --drawer-z-hamburger: 100000;
+}
+
+/* OS の「視差効果を減らす」設定を尊重する */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --drawer-duration: 0.01ms;
+    --drawer-accordion-duration: 0.01ms;
+  }
+}
+
+/* ---------------------------------------------------------------
+ 背面スクロールのロック
+ JS が開く直前に body へ inline で top: -{スクロール量}px を入れる。
+ position: fixed にすることで iOS の慣性スクロール抜けを防ぐ。
+--------------------------------------------------------------- */
+.drawer-open {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* ---------------------------------------------------------------
+ パネル
+--------------------------------------------------------------- */
+.drawer-nav {
+  position: fixed;
+  z-index: var(--drawer-z-nav);
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  width: var(--drawer-width);
+  max-width: 100%;
+  color: #222;
+  background-color: #fff;
+  /* スクロールはネイティブに任せる */
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  /* 閉じている間は描画・タブ移動の対象から外す */
+  visibility: hidden;
+  /* transform だけを動かす。visibility はスライド完了後に切り替える */
+  transition-property: transform, visibility;
+  transition-duration: var(--drawer-duration), 0s;
+  transition-timing-function: var(--drawer-easing), linear;
+  transition-delay: 0s, var(--drawer-duration);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* アニメーション中だけ合成レイヤーを予約する（常時確保はメモリの無駄） */
+.drawer-animating .drawer-nav {
+  will-change: transform;
+}
+
+/* 閉じている状態の待機位置（方向別） ----------------------------- */
+/* 右から出る（既定） */
+.drawer--right .drawer-nav {
+  right: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+/* 左から出る */
+.drawer--left .drawer-nav {
+  left: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+/* 上から出る */
+.drawer--top .drawer-nav {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: auto;
+  width: 100%;
+  max-height: 100%;
+  transform: translate3d(0, -100%, 0);
+}
+
+/* 開いた状態 ---------------------------------------------------- */
+/* 待機位置の指定（.drawer--right .drawer-nav など）と詳細度が並ばないよう、
+   方向クラスと drawer-open を連結させて必ず上書きできるようにする。
+   .drawer-open .drawer-nav だけだと詳細度が同点になり、
+   後ろに書かれた待機位置の transform に負けて開かなくなる。 */
+.drawer--right.drawer-open .drawer-nav,
+.drawer--left.drawer-open .drawer-nav,
+.drawer--top.drawer-open .drawer-nav {
+  transform: translate3d(0, 0, 0);
+}
+
+.drawer-open .drawer-nav {
+  visibility: visible;
+  transition-delay: 0s, 0s;
+}
+
+/* ---------------------------------------------------------------
+ オーバーレイ（JS が生成し .drawer-toggle も兼ねる）
+--------------------------------------------------------------- */
+.drawer-overlay {
+  position: fixed;
+  z-index: var(--drawer-z-overlay);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  background-color: var(--drawer-overlay-color);
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition-property: opacity, visibility;
+  transition-duration: var(--drawer-duration), 0s;
+  transition-timing-function: var(--drawer-easing), linear;
+  transition-delay: 0s, var(--drawer-duration);
+}
+
+.drawer-open .drawer-overlay {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s, 0s;
+}
+
+/* ---------------------------------------------------------------
+ ハンバーガーボタン
+--------------------------------------------------------------- */
+.drawer-hamburger {
+  position: fixed;
+  z-index: var(--drawer-z-hamburger);
+  top: 0;
+  display: block;
+  box-sizing: content-box;
+  width: 2rem;
+  padding: 18px 0.75rem 30px;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  /* iOS のダブルタップ判定による 300ms の反応遅れを消す */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  /* transition: all は使わない（レイアウトまで毎フレーム動いてしまう） */
+  transition: background-color var(--drawer-duration) var(--drawer-easing);
+}
+
+.drawer--right .drawer-hamburger {
+  right: 0;
+}
+
+.drawer--left .drawer-hamburger {
+  left: 0;
+}
+
+.drawer--top .drawer-hamburger {
+  right: 0;
+}
+
+.drawer-hamburger:hover {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* 3本線 → ×（transform のみで変形させる） */
+.drawer-hamburger-icon {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+}
+
+.drawer-hamburger-icon,
+.drawer-hamburger-icon::before,
+.drawer-hamburger-icon::after {
+  width: 100%;
+  height: 2px;
+  background-color: #222;
+  /* top は動かさない。動かすとレイアウト計算が毎フレーム走るため、
+     ×印への変形は translateY + rotate だけで行う */
+  transition: transform var(--drawer-duration) var(--drawer-easing),
+    background-color var(--drawer-duration) var(--drawer-easing);
+}
+
+.drawer-hamburger-icon::before,
+.drawer-hamburger-icon::after {
+  position: absolute;
+  left: 0;
+  content: " ";
+}
+
+.drawer-hamburger-icon::before {
+  top: calc(var(--drawer-bar-gap) * -1);
+}
+
+.drawer-hamburger-icon::after {
+  top: var(--drawer-bar-gap);
+}
+
+.drawer-open .drawer-hamburger-icon {
+  background-color: transparent;
+}
+
+/* 上下の線を中央（＝真ん中の線の位置）へ寄せてから回転させる */
+.drawer-open .drawer-hamburger-icon::before {
+  transform: translateY(var(--drawer-bar-gap)) rotate(45deg);
+}
+
+.drawer-open .drawer-hamburger-icon::after {
+  transform: translateY(calc(var(--drawer-bar-gap) * -1)) rotate(-45deg);
+}
+
+.drawer-hamburger-txt {
+  display: block;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------
+ メニュー
+--------------------------------------------------------------- */
+.drawer-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.drawer-menu-item {
+  display: block;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #222;
+  text-decoration: none;
+}
+
+.drawer-menu-item:hover {
+  color: #555;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+/* 開閉トリガー（<p class="drawer-menu-item">）は JS が role="button" を付ける */
+.drawer-dropdown > .drawer-menu-item {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------------------------------------------------------------
+ サブメニュー（アコーディオン）
+ height を JS が px で与え、閉じ切ったら CSS の 0 に戻す。
+ jQuery.slideToggle と違い、毎フレームの JS 実行が無い。
+--------------------------------------------------------------- */
+.drawer-dropdown-menu {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  visibility: hidden;
+  background-color: #fff;
+  transition-property: height, visibility;
+  transition-duration: var(--drawer-accordion-duration), 0s;
+  transition-timing-function: ease, linear;
+  transition-delay: 0s, var(--drawer-accordion-duration);
+}
+
+.drawer-dropdown.open > .drawer-dropdown-menu {
+  visibility: visible;
+  transition-delay: 0s, 0s;
+}
+
+.drawer-dropdown-menu > li {
+  width: 100%;
+  list-style: none;
+}
+
+.drawer-dropdown-menu-item {
+  display: block;
+  padding: 0 0.75rem 0 1.5rem;
+  line-height: 3.75rem;
+  color: #222;
+  text-decoration: none;
+}
+
+.drawer-dropdown-menu-item:hover {
+  color: #555;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+/* 開閉を示す矢印 */
+.drawer-current {
+  display: block;
+  transition: transform var(--drawer-accordion-duration) ease;
+}
+
+.drawer-dropdown .drawer-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  transform: rotate(0deg);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.drawer-dropdown.open .drawer-caret {
+  transform: rotate(180deg);
+}
+
+/* ---------------------------------------------------------------
+ スクリーンリーダー専用テキスト
+--------------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
