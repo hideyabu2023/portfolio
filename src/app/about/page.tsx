@@ -15,15 +15,25 @@ const profile = [
 const history: { year: string; lines: React.ReactNode[] }[] = [
   {
     year: "2012",
-    lines: ["産業機械のレンタル・リースを行う会社へ営業職で入社。", "テレアポ、飛び込み営業で顧客を獲得"],
+    lines: [
+      "産業機械のレンタル・リースを行う会社へ営業職で入社。",
+      "テレアポ、飛び込み営業で顧客を獲得",
+    ],
   },
   {
     year: "2013",
-    lines: ["フォルクスワーゲンの正規ディーラー店の営業職として転職。", "入社1カ月、月間業績1位を獲得。"],
+    lines: [
+      "フォルクスワーゲンの正規ディーラー店の営業職として転職。",
+      "入社1カ月、月間業績1位を獲得。",
+    ],
   },
   {
     year: "2014",
-    lines: ["店舗閉店により退職。", "市内のステッカーデザイン会社へ転職。", "デザイナー、管理職、営業職を兼任する。"],
+    lines: [
+      "店舗閉店により退職。",
+      "市内のステッカーデザイン会社へ転職。",
+      "デザイナー、管理職、営業職を兼任する。",
+    ],
   },
   {
     year: "2017",
@@ -43,9 +53,20 @@ const history: { year: string; lines: React.ReactNode[] }[] = [
         自社CMSのインハウスコーダーとして勤務し、社内対応案件数1位を獲得(社長賞)。
       </>,
       <>
-        現在は、通常案件に加え、マニュアル作成や業務改善、教育などの管理業務を兼任。
+        通常案件に加え、マニュアル作成や業務改善、教育などの管理業務を兼任。
         <br className="sp-none" />
-        全国のコーディングリーダーとして勤務しています。
+        全国のコーディングリーダーとして勤務。
+      </>,
+    ],
+  },
+  {
+    year: "2024",
+    lines: [
+      "Webエンジニアとして就職。",
+      <>
+        CMS連携や静的サイトのみではなく、Webサービスへの知見を高める必要があると考え、長年勤めた企業を退職。{" "}
+        <br className="sp-none" />
+        現在はフロントエンドエンジニアとして勤務しています。
       </>,
     ],
   },
@@ -64,7 +85,12 @@ export default function AboutPage() {
             </h3>
             <div className="about-profile-container flex flx-alitem-strt flx-btw">
               <div className="com-img">
-                <Image src="/img/about/profile-img.jpg" alt="大藪英雄" width={383} height={362} />
+                <Image
+                  src="/img/about/profile-img.jpg"
+                  alt="大藪英雄"
+                  width={383}
+                  height={362}
+                />
               </div>
               <dl className="about-profile-dl eng">
                 {profile.map(([label, value]) => (
