@@ -7,13 +7,15 @@ type Props = {
   work: Work;
   /** トップは "top"、一覧は "all"（旧サイトのクラス名 com-top-works / com-all-works に対応） */
   variant: "top" | "all";
+  /** ファーストビューに入るカードの画像を遅延読み込みしない */
+  eager?: boolean;
 };
 
-export default function WorkCard({ work, variant }: Props) {
+export default function WorkCard({ work, variant, eager }: Props) {
   return (
     <article className={`com-${variant}-works`}>
       <Link href={`/works/${work.id}`}>
-        <WorkThumbnail work={work} />
+        <WorkThumbnail work={work} eager={eager} />
         <h4 className="site-name">{work.title}</h4>
         <dl
           className={`${variant}-works-skill${variant === "all" ? " eng" : ""}`}

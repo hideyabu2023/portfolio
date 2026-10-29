@@ -19,7 +19,10 @@ export default async function WorksPage() {
           </h3>
           <div className="all-works-container flex flx-wrp">
             {works.length ? (
-              works.map((work) => <WorkCard key={work.id} work={work} variant="all" />)
+              // PC は2列なので先頭2件がファーストビューに入る
+              works.map((work, i) => (
+                <WorkCard key={work.id} work={work} variant="all" eager={i < 2} />
+              ))
             ) : (
               <p>実績は準備中です。</p>
             )}

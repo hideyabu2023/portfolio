@@ -1,10 +1,11 @@
 import Image from "next/image";
 import type { Work } from "@/lib/microcms";
 
-type Props = { work: Work; priority?: boolean };
+/** eager: ファーストビューに入る画像（LCP）は遅延読み込みしない */
+type Props = { work: Work; eager?: boolean };
 
 /** 作品の画像。未登録のときはグレーの枠だけ出す */
-export default function WorkThumbnail({ work, priority }: Props) {
+export default function WorkThumbnail({ work, eager }: Props) {
   const { thumbnail } = work;
 
   if (!thumbnail) return <div className="com-img is-empty"></div>;
@@ -17,7 +18,7 @@ export default function WorkThumbnail({ work, priority }: Props) {
         width={thumbnail.width ?? 1880}
         height={thumbnail.height ?? 900}
         sizes="(max-width: 767px) 100vw, 50vw"
-        priority={priority}
+        loading={eager ? "eager" : undefined}
       />
     </div>
   );

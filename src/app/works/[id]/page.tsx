@@ -34,7 +34,7 @@ async function WorkDetail({ params }: Pick<PageProps<"/works/[id]">, "params">) 
         <span className="ja">{work.title}</span>
       </h3>
       <div className="s-works-container flex flx-btw flx-alitem-strt">
-        <WorkThumbnail work={work} priority />
+        <WorkThumbnail work={work} eager />
         <div className="s-works-bx">
           <dl className="s-works-dl eng">
             {rows
